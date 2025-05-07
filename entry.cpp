@@ -7,6 +7,7 @@
 #include "player.h"
 #include "ext/unistd.h"
 #include "SDL.h"
+#include "map.h"
 void rendering::postInit() {
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 
@@ -20,13 +21,17 @@ void rendering::postInit() {
 	wallTexture.load((assetsImgPath + "wall.png").c_str());
 	floorTexture.load((assetsImgPath + "floor.png").c_str());
 	ceilingTexture.load((assetsImgPath + "ceiling.png").c_str());
+	entityTexture.load("empty.png");
+
 	rendering::_internal::format = SDL_AllocFormat(SDL_PIXELFORMAT_RGBA8888);
+	generateMap();
 }
 
 void rendering::render()
 {
-	drawWalls();
+	raycast();
 	drawFloorAndCeiling();
+	//drawDebugMiniMap();
 	player::playerInput();
 }
 

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "SDL.h"
-#include "texture.h"
 namespace rendering
 {
 	namespace _internal {
@@ -28,5 +27,6 @@ namespace rendering
 	void drawPixel(int x, int y, int r, int g, int b, int a);
 
 	void drawRect(int x, int y, int w, int h, int r, int g, int b, int a);
+	void drawLine(float x1, float y1, float x2, float y2, int r, int g, int b, int a);
 	void onEvent(SDL_Event event);
 }

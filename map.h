@@ -1,15 +1,8 @@
 #pragma once
 
-#define MAP_WIDTH 8
-#define MAP_HEIGHT 8
+#define MAP_WIDTH 16
+#define MAP_HEIGHT 16
 
-int mapArray[MAP_HEIGHT][MAP_WIDTH] = {
-	{2, 2, 2, 2, 2, 2, 2, 2},
-	{2, 0, 0, 0, 0, 0, 0, 2},
-	{2, 0, 0, 0, 0, 0, 0, 2},
-	{2, 0, 0, 0, 0, 0, 0, 2},
-	{2, 0, 0, 0, 1, 0, 0, 2},
-	{2, 0, 0, 0, 0, 0, 0, 2},
-	{2, 0, 0, 0, 0, 0, 0, 2},
-	{2, 2, 2, 2, 2, 2, 2, 2}
-};
+inline int mapArray[MAP_HEIGHT][MAP_WIDTH] = {};
+
+void generateMap();

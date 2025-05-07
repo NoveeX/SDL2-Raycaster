@@ -1,6 +1,14 @@
 #include "rendering.h"
 #include "logger.h"
 #include "texture.h"
+
+#include <algorithm>
+#include <cmath>
+
+#ifdef max
+#undef max
+#endif
+
 void rendering::initialize(const char* title)
 {
 
@@ -20,14 +28,14 @@ void rendering::initialize(const char* title)
 		return;
 	}
 
-	renderer = SDL_CreateRenderer(window, -1, 0);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	if (window == NULL) {
 		logger.log("Renderer could not be created! SDL_Error: %s", SDL_GetError());
 		return;
 	}
 
 	SDL_Texture* frameTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, width, height);
-
+	
 	postInit();
 
 	Uint32 lastTime = SDL_GetTicks();
@@ -80,5 +88,30 @@ void rendering::drawRect(int x, int y, int w, int h, int r, int g, int b, int a)
 		for (int j = 0; j < h; j++) {
 			drawPixel(x + i, y + j, r, g, b, a);
 		}
+	}
+}
+
+
+void rendering::drawLine(float x1, float y1, float x2, float y2, int r, int g, int b, int a) {
+	float dx = x2 - x1;
+	float dy = y2 - y1;
+
+	float steps = std::max(std::abs(dx), std::abs(dy));
+
+	if (steps == 0) {
+		rendering::drawPixel(static_cast<int>(x1), static_cast<int>(y1), r, g, b, a);
+		return;
+	}
+
+	float xInc = dx / steps;
+	float yInc = dy / steps;
+
+	float x = x1;
+	float y = y1;
+
+	for (int i = 0; i <= steps; ++i) {
+		rendering::drawPixel(static_cast<int>(x), static_cast<int>(y), r, g, b, a);
+		x += xInc;
+		y += yInc;
 	}
 }

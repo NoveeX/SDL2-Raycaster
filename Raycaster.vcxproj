@@ -169,12 +169,14 @@
   <ItemGroup>
     <ClCompile Include="entry.cpp" />
     <ClCompile Include="ext\logger\logger.cpp" />
+    <ClCompile Include="map.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="raycaster\raycaster.cpp" />
     <ClCompile Include="rendering.cpp" />
     <ClCompile Include="texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="entity.h" />
     <ClInclude Include="ext\logger\logger.h" />
     <ClInclude Include="ext\sdl2\begin_code.h" />
     <ClInclude Include="ext\sdl2\close_code.h" />
